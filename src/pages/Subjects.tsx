@@ -1,57 +1,57 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
-// Import images
-import businessImg from "../assets/International Business School/businessImg.jpg";
-import artImg from "../assets/School of Design/artImg.jpg";
-import performingArtsImg from "../assets/School of Humanities and Performing Arts/performingArtsImg.jpg";
-import engineeringImg from "../assets/School of Engineering/engineeringImg.jpg";
-import physicsImg from "../assets/School of Mathematics and Physics/physicsImg.jpg";
-import healthImg from "../assets/School of Health and Care Sciences/healthImg.jpg";
-import socialImg from "../assets/School of Social Work and Social Care/socialImg.jpg";
-import humanitiesImg from "../assets/School of Humanities and Performing Arts/humanitiesImg.jpg";
+import {
+  Briefcase,
+  Palette,
+  Music,
+  Cpu,
+  Atom,
+  HeartPulse,
+  Users,
+  BookOpen
+} from "lucide-react";
 
 // Official 8 schools from University of Lincoln spreadsheet
 const schools = [
   {
     name: "Business and Management",
-    image: businessImg,
+    icon: Briefcase,
     gradient: "from-blue-500 to-blue-700",
   },
   {
     name: "Art and Design",
-    image: artImg,
+    icon: Palette,
     gradient: "from-pink-500 to-purple-600",
   },
   {
     name: "Performing Arts and Literature",
-    image: performingArtsImg,
+    icon: Music,
     gradient: "from-purple-500 to-indigo-600",
   },
   {
     name: "Engineering and Computing",
-    image: engineeringImg,
+    icon: Cpu,
     gradient: "from-cyan-500 to-blue-600",
   },
   {
     name: "Physical Sciences",
-    image: physicsImg,
+    icon: Atom,
     gradient: "from-green-500 to-teal-600",
   },
   {
     name: "Life and Health Sciences",
-    image: healthImg,
+    icon: HeartPulse,
     gradient: "from-red-500 to-pink-600",
   },
   {
     name: "Social Sciences",
-    image: socialImg,
+    icon: Users,
     gradient: "from-orange-500 to-red-600",
   },
   {
     name: "Humanities and Environment",
-    image: humanitiesImg,
+    icon: BookOpen,
     gradient: "from-emerald-500 to-green-700",
   },
 ];
@@ -157,24 +157,28 @@ const Subjects = () => {
                   </div>
                 )}
 
-                {/* Image Circle */}
+                {/* Icon with Gradient Background */}
                 <div
                   className={`
-                  w-full h-24 sm:h-28 mx-auto mb-4
-                  rounded-xl
-                  overflow-hidden
+                  w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4
+                  rounded-2xl
+                  bg-gradient-to-br ${school.gradient}
+                  flex items-center justify-center
                   transition-all duration-300
                   ${
                     isSelected
-                      ? "shadow-xl ring-4 ring-white/30 scale-105"
-                      : "group-hover:scale-105"
+                      ? "shadow-xl ring-4 ring-white/30 scale-110"
+                      : "group-hover:scale-110 shadow-lg"
                   }
                 `}
                 >
-                  <img
-                    src={school.image}
-                    alt={school.name}
-                    className="w-full h-full object-cover transition-all duration-300"
+                  <school.icon
+                    className={`
+                      w-8 h-8 sm:w-10 sm:h-10
+                      transition-all duration-300
+                      ${isSelected ? "text-white" : "text-white"}
+                    `}
+                    strokeWidth={2}
                   />
                 </div>
 
