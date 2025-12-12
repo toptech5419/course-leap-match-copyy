@@ -66,9 +66,9 @@ const Welcome = () => {
               <span className="text-white/90 text-sm font-medium">University of Lincoln • Undergraduate</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight pb-2">
               Find Your Perfect
-              <span className="block bg-gradient-to-r from-[#fddb35] via-[#ffd700] to-[#fddb35] bg-clip-text text-transparent animate-pulse">
+              <span className="block bg-gradient-to-r from-[#fddb35] via-[#ffd700] to-[#fddb35] bg-clip-text text-transparent animate-pulse pb-2">
                 Undergraduate Match
               </span>
             </h1>
