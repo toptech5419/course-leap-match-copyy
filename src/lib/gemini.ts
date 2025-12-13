@@ -47,7 +47,14 @@ export async function getChatResponse(
     });
 
     // Build conversation history for context
-    const chatHistory = conversationHistory.map(msg => ({
+    // Filter out the initial bot greeting (Gemini requires history to start with user)
+    const filteredHistory = conversationHistory.filter((msg, index) => {
+      // Skip initial bot messages before the first user message
+      const firstUserIndex = conversationHistory.findIndex(m => m.role === "user");
+      return index >= firstUserIndex;
+    });
+
+    const chatHistory = filteredHistory.map(msg => ({
       role: msg.role === "user" ? "user" : "model",
       parts: [{ text: msg.content }]
     }));
