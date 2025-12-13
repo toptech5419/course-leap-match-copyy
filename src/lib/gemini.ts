@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
 // Initialize Gemini API
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -7,10 +7,10 @@ if (!apiKey) {
   console.warn("⚠️ VITE_GEMINI_API_KEY not found. Chat will use fallback responses.");
 }
 
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+const genAI = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 // System prompt with University of Lincoln context
-const SYSTEM_PROMPT = `You are a friendly and knowledgeable University of Lincoln course advisor chatbot. Your role is to help prospective students learn about courses, entry requirements, campus life, and the application process.
+const SYSTEM_INSTRUCTION = `You are a friendly and knowledgeable University of Lincoln course advisor chatbot. Your role is to help prospective students learn about courses, entry requirements, campus life, and the application process.
 
 Key Information:
 - University: University of Lincoln, UK
@@ -41,40 +41,37 @@ export async function getChatResponse(
   }
 
   try {
-    const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
-      systemInstruction: SYSTEM_PROMPT
-    });
-
-    // Build conversation history for context
-    // Filter out the initial bot greeting (Gemini requires history to start with user)
+    // Build conversation contents from history
+    // Filter out the initial bot greeting (must start with user message)
     const firstUserIndex = conversationHistory.findIndex(m => m.role === "user");
 
-    // If no user messages yet, start with empty history
-    if (firstUserIndex === -1) {
-      const chat = model.startChat({
-        history: [],
-      });
-      const result = await chat.sendMessage(userMessage);
-      return result.response.text();
+    let contents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
+
+    // Add conversation history if exists
+    if (firstUserIndex !== -1) {
+      const filteredHistory = conversationHistory.slice(firstUserIndex);
+      contents = filteredHistory.map(msg => ({
+        role: msg.role === "user" ? "user" : "model",
+        parts: [{ text: msg.content }]
+      }));
     }
 
-    // Get messages starting from first user message
-    const filteredHistory = conversationHistory.slice(firstUserIndex);
-
-    const chatHistory = filteredHistory.map(msg => ({
-      role: msg.role === "user" ? "user" : "model",
-      parts: [{ text: msg.content }]
-    }));
-
-    const chat = model.startChat({
-      history: chatHistory,
+    // Add current user message
+    contents.push({
+      role: "user",
+      parts: [{ text: userMessage }]
     });
 
-    const result = await chat.sendMessage(userMessage);
-    const response = result.response.text();
+    // Generate response using new API
+    const response = await genAI.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: contents,
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION
+      }
+    });
 
-    return response;
+    return response.text || getFallbackResponse(userMessage);
   } catch (error) {
     console.error("Gemini API Error:", error);
     return getFallbackResponse(userMessage);
