@@ -348,7 +348,7 @@ const Matching = () => {
           {/* Fun Facts */}
           <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
             <p className="text-white/90 text-sm italic">
-              "University of Lincoln has over 150+ undergraduate courses across 8 schools!"
+              "University of Lincoln has over 220 undergraduate courses across 13 schools!"
             </p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 // University of Lincoln - Course Data
-// Organized by the Official 8 Schools (Based on Institutional Research 2025)
+// Organized by the Official 13 Schools (Based on Institutional Research 2025)
 // Structure verified against: https://www.lincoln.ac.uk/studywithus/subjects/
 
 export interface Course {

@@ -15,7 +15,7 @@ const SYSTEM_INSTRUCTION = `You are a friendly and knowledgeable University of L
 Key Information:
 - University: University of Lincoln, UK
 - Location: Historic city of Lincoln, England
-- Courses: 150+ undergraduate courses across 8 schools
+- Courses: 220+ undergraduate courses across 13 schools
 - Entry Requirements: Typically 96-112 UCAS points (varies by course)
 - Tuition Fees: £9,250/year for UK students
 - Application: Through UCAS, deadline typically January for September entry
@@ -92,7 +92,7 @@ function getFallbackResponse(userInput: string): string {
     return "Applications are made through UCAS. The deadline for September entry is typically in January, but we recommend applying earlier (October-December) for the best chance. I can help you understand what's needed for your application - just ask! 📝";
   }
   if (input.includes('course') || input.includes('program') || input.includes('study')) {
-    return "We offer over 150 undergraduate courses across 8 schools. Each course combines theoretical knowledge with hands-on experience. You'll work on real-world projects and have access to industry-standard equipment. Which subject area interests you most? 📚";
+    return "We offer over 220 undergraduate courses across 13 schools. Each course combines theoretical knowledge with hands-on experience. You'll work on real-world projects and have access to industry-standard equipment. Which subject area interests you most? 📚";
   }
   if (input.includes('fee') || input.includes('tuition') || input.includes('cost') || input.includes('price')) {
     return "Tuition fees for UK students are £9,250 per year. International fees vary by course. We offer various scholarships and bursaries - would you like to know more about financial support options? 💰";

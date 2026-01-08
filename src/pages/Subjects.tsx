@@ -12,7 +12,7 @@ import {
   BookOpen
 } from "lucide-react";
 
-// Official 8 schools from University of Lincoln spreadsheet
+// Official 13 schools from University of Lincoln
 const schools = [
   {
     name: "Business and Management",
