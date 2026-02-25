@@ -17,6 +17,20 @@
 
 ---
 
+## 📸 Screenshots
+
+<div align="center">
+
+![App Flow](docs/screenshots/app-flow.png)
+
+| Swipe Cards | Your Match |
+|---|---|
+| ![Swipe Card](docs/screenshots/swipe-card.png) | ![Match Result](docs/screenshots/match-result.png) |
+
+</div>
+
+---
+
 ## 🎓 About
 
 **Meet Your Match** was built for a **Lincoln Award Programme** employer brief at the **University of Lincoln** to address a real institutional challenge: reduced student enrollment caused by prospective students being unsure of what to study.
